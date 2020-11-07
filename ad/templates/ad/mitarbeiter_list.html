@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Mitarbeiter</title>
+  </head>
+  <body>
+    <form action={% url 'ad:mitarbeiterneu' %} method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-default">
+          Neue*r Mitarbeiter*in
+        </button>
+    </form>
+    {% if object_list %}
+        <ul>
+        {% for mitarbeiter in object_list %}
+            <li>
+                <a href={% url 'ad:mitarbeiterdaten' mitarbeiter.id %}>
+                    {{ mitarbeiter.nachname }}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Bisher gibt es noch keine Mitarbeiter.</p>
+    {% endif %}
+  </body>
+</html>
